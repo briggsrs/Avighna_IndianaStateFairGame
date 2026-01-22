@@ -188,14 +188,25 @@
       border: 2px solid #2a3b73;
       margin: clamp(8px, 2vw, 12px) 0;
       position: relative;
-      background: #0f1730;
+      background: linear-gradient(135deg, #1a2a5e 0%, #0f1730 50%, #1a3a4e 100%);
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .landmark-placeholder {
+      font-size: clamp(50px, 12vw, 80px);
+      opacity: 0.4;
+      position: absolute;
+      z-index: 0;
     }
     .landmark-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
     .landmark-container:hover .landmark-img {
       transform: scale(1.05);
@@ -1452,115 +1463,142 @@ const townCoords = {
   "Columbus": { lat: 39.2014, lng: -85.9214 }
 };
 
-// Famous landmarks in each town with Wikimedia Commons images
+// Famous landmarks in each town - Library of Congress Carol M. Highsmith Archive (Public Domain)
 const townLandmarks = {
   "Indianapolis": {
     name: "Indianapolis Motor Speedway",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Indianapolis_Motor_Speedway_Aerial.jpg/1280px-Indianapolis_Motor_Speedway_Aerial.jpg"
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40800/40838v.jpg",
+    icon: "🏎️"
   },
   "Bloomington": {
-    name: "Indiana University Sample Gates",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Indiana_University_Sample_Gates.jpg/1280px-Indiana_University_Sample_Gates.jpg"
+    name: "Indiana University Auditorium",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41000/41084v.jpg",
+    icon: "🎓"
   },
   "Vincennes": {
-    name: "George Rogers Clark Memorial",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/George_Rogers_Clark_Memorial_-_Vincennes%2C_Indiana.jpg/1280px-George_Rogers_Clark_Memorial_-_Vincennes%2C_Indiana.jpg"
+    name: "New Harmony Toll Bridge",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/12100/12145v.jpg",
+    icon: "🏛️"
   },
   "Washington": {
-    name: "Daviess County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Daviess_County_Courthouse%2C_Washington.jpg/1024px-Daviess_County_Courthouse%2C_Washington.jpg"
+    name: "Indiana Countryside",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🌾"
   },
   "Evansville": {
-    name: "USS LST-325 Ship Memorial",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/USS_LST-325.jpg/1280px-USS_LST-325.jpg"
+    name: "New Harmony Historic Site",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/12100/12145v.jpg",
+    icon: "🏛️"
   },
   "New Albany": {
-    name: "Falls of the Ohio",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Falls_of_the_Ohio_-_Fossil_Beds.jpg/1280px-Falls_of_the_Ohio_-_Fossil_Beds.jpg"
+    name: "Southern Indiana Landscape",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🌊"
   },
   "Bedford": {
-    name: "Bedford Courthouse Square",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Lawrence_County_Courthouse%2C_Bedford.jpg/1024px-Lawrence_County_Courthouse%2C_Bedford.jpg"
+    name: "Indiana Limestone Sculpture",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40900/40977v.jpg",
+    icon: "🪨"
   },
   "Seymour": {
-    name: "John Mellencamp Mural",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Jackson_County_Courthouse_in_Brownstown.jpg/1024px-Jackson_County_Courthouse_in_Brownstown.jpg"
+    name: "Southern Indiana Town",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🎸"
   },
   "Columbus": {
-    name: "Miller House and Garden",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Columbus-indiana-architecture-702702730-702702730.jpg/1280px-Columbus-indiana-architecture-702702730-702702730.jpg"
+    name: "Henry Moore's Large Arch",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/18600/18657v.jpg",
+    icon: "🏗️"
   },
   "Shelbyville": {
-    name: "Shelby County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Shelby_County_Courthouse%2C_Shelbyville.jpg/1024px-Shelby_County_Courthouse%2C_Shelbyville.jpg"
+    name: "Indiana Historic Town",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🏛️"
   },
   "Richmond": {
-    name: "Wayne County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Wayne_County_Indiana_Courthouse.jpg/1024px-Wayne_County_Indiana_Courthouse.jpg"
+    name: "Eastern Indiana",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🏛️"
   },
   "New Castle": {
-    name: "New Castle Fieldhouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/New_Castle_Chrysler_High_School_Fieldhouse.jpg/1280px-New_Castle_Chrysler_High_School_Fieldhouse.jpg"
+    name: "Indiana Basketball Heritage",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41300/41313v.jpg",
+    icon: "🏀"
   },
   "Muncie": {
-    name: "Ball State University",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Beneficence_statue%2C_Ball_State_University.jpg/1024px-Beneficence_statue%2C_Ball_State_University.jpg"
+    name: "Muncie Public Library",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41200/41235v.jpg",
+    icon: "🎓"
   },
   "Marion": {
-    name: "James Dean Memorial",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/James_Dean_Gallery_in_Fairmount%2C_Indiana.jpg/1024px-James_Dean_Gallery_in_Fairmount%2C_Indiana.jpg"
+    name: "Grant County Indiana",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41000/41007v.jpg",
+    icon: "🎬"
   },
   "Huntington": {
-    name: "Huntington County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Huntington_County_Courthouse.jpg/1024px-Huntington_County_Courthouse.jpg"
+    name: "Northern Indiana Town",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41100/41191v.jpg",
+    icon: "🏛️"
   },
   "Fort Wayne": {
     name: "Allen County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Allen_County_Courthouse_Fort_Wayne.jpg/1024px-Allen_County_Courthouse_Fort_Wayne.jpg"
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41100/41191v.jpg",
+    icon: "⚖️"
   },
   "Angola": {
-    name: "Pokagon State Park",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pokagon_State_Park_Lake_James.jpg/1280px-Pokagon_State_Park_Lake_James.jpg"
+    name: "Northeastern Indiana",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41100/41174v.jpg",
+    icon: "🌲"
   },
   "Elkhart": {
-    name: "RV/MH Hall of Fame",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/RV-MH_Hall_of_Fame_front.JPG/1280px-RV-MH_Hall_of_Fame_front.JPG"
+    name: "Amish Country",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41100/41157v.jpg",
+    icon: "🐴"
   },
   "South Bend": {
     name: "Notre Dame Golden Dome",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Golden_dome_2023.jpg/1024px-Golden_dome_2023.jpg"
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/18600/18695v.jpg",
+    icon: "⛪"
   },
   "La Porte": {
-    name: "La Porte County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/La_Porte_County_Courthouse.jpg/1024px-La_Porte_County_Courthouse.jpg"
+    name: "LaPorte County Courthouse",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40780v.jpg",
+    icon: "⚖️"
   },
   "Michigan City": {
-    name: "Michigan City Lighthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Michigan_City_Light_in_2013.JPG/1024px-Michigan_City_Light_in_2013.JPG"
+    name: "Michigan City East Light",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/12100/12142v.jpg",
+    icon: "🗼"
   },
   "Gary": {
-    name: "Gary Aquatorium",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Aquatorium_Gary_Indiana.jpg/1280px-Aquatorium_Gary_Indiana.jpg"
+    name: "Historic Downtown Gary",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40755v.jpg",
+    icon: "🏛️"
   },
   "Hammond": {
-    name: "Wolf Lake Pavilion",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Hammond_Indiana_City_Hall.jpg/1024px-Hammond_Indiana_City_Hall.jpg"
+    name: "Northwest Indiana",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40759v.jpg",
+    icon: "🏞️"
   },
   "Logansport": {
-    name: "Cass County Carousel",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Cass_County_Carousel_2020.jpg/1280px-Cass_County_Carousel_2020.jpg"
+    name: "Central Indiana",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🎠"
   },
   "Lafayette": {
-    name: "Purdue University",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_University%2C_West_Lafayette%2C_Indiana%2C_Estados_Unidos%2C_2012-10-15%2C_DD_17.jpg/1280px-Purdue_University%2C_West_Lafayette%2C_Indiana%2C_Estados_Unidos%2C_2012-10-15%2C_DD_17.jpg"
+    name: "Tippecanoe Battlefield Monument",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40600/40695v.jpg",
+    icon: "🏛️"
   },
   "Kokomo": {
-    name: "Elwood Haynes Museum",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Elwood_Haynes_Museum.jpg/1024px-Elwood_Haynes_Museum.jpg"
+    name: "Central Indiana City",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/41000/41007v.jpg",
+    icon: "🚗"
   },
   "Terre Haute": {
-    name: "Vigo County Courthouse",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Vigo_County_Courthouse%2C_Terre_Haute%2C_IN%2C_US_%282%29.jpg/1024px-Vigo_County_Courthouse%2C_Terre_Haute%2C_IN%2C_US_%282%29.jpg"
+    name: "Western Indiana",
+    image: "https://tile.loc.gov/storage-services/service/pnp/highsm/40700/40714v.jpg",
+    icon: "🎓"
   }
 };
 
@@ -2026,9 +2064,9 @@ function addEnterKeySupport(buttonId) {
 // Famous Hoosiers data with sprite paths and GIFs
 // hasWalkAnim indicates if the sprite has frame-by-frame walking animations
 const famousHoosiers = [
-  { id: "mj", name: "Michael Jackson", title: "King of Pop", emoji: "🎤", portrait: "portrait-mj", hometown: "Gary", sprite: "sprites/michael_jackson", gif: "sprites/michael_jackson/Michael_Jackson_rotations_8dir.gif", hasWalkAnim: true },
-  { id: "larry", name: "Larry Bird", title: "NBA Legend", emoji: "🏀", portrait: "portrait-larry", hometown: "French Lick", sprite: "sprites/larry_bird", gif: "sprites/larry_bird/Larry_Bird_rotations_8dir.gif", hasWalkAnim: true },
-  { id: "james", name: "James Dean", title: "Hollywood Icon", emoji: "🎬", portrait: "portrait-james", hometown: "Marion", sprite: "sprites/james_dean", gif: "sprites/james_dean/James_Dean_rotations_8dir.gif", hasWalkAnim: true },
+  { id: "mj", name: "Michael Jackson", title: "King of Pop", emoji: "🎤", portrait: "portrait-mj", hometown: "Gary", sprite: "sprites/Michael_Jackson", gif: "sprites/Michael_Jackson/Michael_Jackson_rotations_8dir.gif", hasWalkAnim: true },
+  { id: "larry", name: "Larry Bird", title: "NBA Legend", emoji: "🏀", portrait: "portrait-larry", hometown: "French Lick", sprite: "sprites/Larry_Bird", gif: "sprites/Larry_Bird/Larry_Bird_rotations_8dir.gif", hasWalkAnim: true },
+  { id: "james", name: "James Dean", title: "Hollywood Icon", emoji: "🎬", portrait: "portrait-james", hometown: "Marion", sprite: "sprites/James_Dean", gif: "sprites/James_Dean/James_Dean_rotations_8dir.gif", hasWalkAnim: true },
   { id: "abe", name: "Abraham Lincoln", title: "16th President", emoji: "🎩", portrait: "portrait-abe", hometown: "Spencer County", sprite: "sprites/Abraham_Lincoln", gif: "sprites/Abraham_Lincoln/Abraham_Lincoln_rotations_8dir.gif", hasWalkAnim: true },
   { id: "axl", name: "Axl Rose", title: "Rock Legend", emoji: "🎸", portrait: "portrait-axl", hometown: "Lafayette", sprite: "sprites/Axl_Rose", gif: "sprites/Axl_Rose/Axl_Rose_rotations_8dir.gif", hasWalkAnim: true },
   { id: "david", name: "David Letterman", title: "TV Host", emoji: "📺", portrait: "portrait-david", hometown: "Indianapolis", sprite: "sprites/David_Letterman", gif: "sprites/David_Letterman/David_Letterman_rotations_8dir.gif", hasWalkAnim: true },
@@ -3032,7 +3070,8 @@ function renderQuestion() {
       </div>
       ${landmark ? `
         <div class="landmark-container">
-          <img src="${landmark.image}" alt="${landmark.name}" class="landmark-img" onerror="this.style.display='none'">
+          <span class="landmark-placeholder">🏛️</span>
+          <img src="${landmark.image}" alt="${landmark.name}" class="landmark-img" onerror="this.style.opacity='0'">
           <div class="landmark-label"><span class="icon">📸</span>${landmark.name}</div>
         </div>
       ` : ''}
@@ -3192,7 +3231,8 @@ function renderFact() {
       </div>
       ${landmark ? `
         <div class="landmark-container">
-          <img src="${landmark.image}" alt="${landmark.name}" class="landmark-img" onerror="this.style.display='none'">
+          <span class="landmark-placeholder">🏛️</span>
+          <img src="${landmark.image}" alt="${landmark.name}" class="landmark-img" onerror="this.style.opacity='0'">
           <div class="landmark-label"><span class="icon">📸</span>${landmark.name}</div>
         </div>
       ` : ''}
